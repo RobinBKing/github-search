@@ -17,7 +17,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 html { overflow-y: scroll; }
 body {
-  background: #fafafa url('grey.png'); /* http://subtlepatterns.com/subtle-grey/ */
+  background: #fafafa url('./../../img/grey.png'); /* http://subtlepatterns.com/subtle-grey/ */
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 62.5%;
   line-height: 1;
@@ -25,29 +25,29 @@ body {
   padding: 35px 0;
 }
 
-br { display: block; line-height: 1.6em; } 
+br { display: block; line-height: 1.6em; }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 ol, ul { list-style: none; }
 
-input, textarea { 
+input, textarea {
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  outline: none; 
+  outline: none;
 }
 
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
-strong, b { font-weight: bold; } 
+strong, b { font-weight: bold; }
 
 table { border-collapse: collapse; border-spacing: 0; }
 img { border: 0; max-width: 100%; }
 
-h1 { 
+h1 {
   font-family: 'Oldenburg', Arial, sans-serif;
   color: #646464;
   font-size: 4.0em;
@@ -68,7 +68,7 @@ p {
   margin-bottom: 12px;
 }
 
-a { 
+a {
   color: #8eadd2;
 }
 a:hover {
@@ -225,6 +225,6 @@ a:hover {
 /* clearfix */
 .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 .clearfix { display: inline-block; }
- 
+
 html[xmlns] .clearfix { display: block; }
 * html .clearfix { height: 1%; }

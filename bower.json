@@ -7,7 +7,7 @@
   ],
   "license": "ISC",
   "moduleType": [],
-  "homepage": "",
+  "homepage": "https://github.com/RobinBKing/github-search",
   "ignore": [
     "**/.*",
     "node_modules",

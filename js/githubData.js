@@ -6,7 +6,7 @@ exports.errorMsg = '';
 var  GithubUser = function(json){
   this.userName     = json.login;
   this.fullName     = json.name;
-  if(this.fullName == undefined) { this.fullName = this.userName; }
+  if(this.fullName === undefined) { this.fullName = this.userName; }
   this.avitarUrl    = json.avatar_url;
   this.profileUrl   = json.html_url;
   this.location     = json.location;
@@ -19,7 +19,7 @@ var  GithubUser = function(json){
 //repository object
 var GitRepository = function(json){
   this.repositoryName = json.name;
-  this.url = json..html_url;
+  this.url = json.html_url;
 };
 
 //json api call
@@ -29,17 +29,17 @@ exports.githubApiData = function(userName){
   //user data
   $.get(requestUri).then(function(jsonUser){
     console.log(jsonUser);
-    newGithubUser = new GithubUser(jsonUser);
+    GithubUser(jsonUser);
     //user repositories
     $.getJSON(repositoryUri, function(jsonRepos){
       $.each(jsonRepos, function(i) {
-        var newRepo = GitRepository(jsonRepos[i]);
-        newGithubUser.repositories.push(newRepo);
+        GitRepository(jsonRepos[i]);
+        newGithubUser.repositories.push(GitRepository);
       });
     });
   }).fail(function(error){
     console.log(error.responseJSON.message);
     errorMsg = error.responseJSON.message;
   });
-  return newGithubUser;
+  return GithubUser;
 };
