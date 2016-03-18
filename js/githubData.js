@@ -1,34 +1,8 @@
 /* functional backend code goes in this file */
 var apiKey = require('./../.env').apiKey;
-var userName; //= daneden
-var requestUri  = 'https://api.github.com/users/' + username + '?access_token=' + apiKey;
-var repositoryUri  = 'https://api.github.com/users/' + username + '/repos?access_token=' + apiKey;
-var errorMsg;
+exports.errorMsg = '';
 
-exports.ghApiData = function(newUserName){
-  userName = newUserName;
-  $.get(requestUri).then(function(response){
-    console.log(response);
-    githubUser(response);
-  }).fail(function(error){
-    console.log(error.responseJSON.message);
-    errorMsg = error.responseJSON.message;
-  });
-  $.getJSON(repositoryUri, function(json){
-    if(repositories.length == 0) { outhtml = outhtml + '<p>No repos!</p></div>'; }
-    else {
-      outhtml = outhtml + '<p><strong>Repos List:</strong></p> <ul>';
-      $.each(repositories, function(index) {
-        outhtml = outhtml + '<li><a href="'+repositories[index].html_url+'" target="_blank">'+repositories[index].name + '</a></li>';
-      });
-      outhtml = outhtml + '</ul></div>';
-    }
-
-
-    GitRepository(json);
-  });
-};
-
+//user object
 var  GithubUser = function(json){
   this.userName     = json.login;
   this.fullName     = json.name;
@@ -39,9 +13,33 @@ var  GithubUser = function(json){
   this.followersNbr = json.followers;
   this.followingNbr = json.following;
   this.reposNbr     = json.public_repos;
+  this.errorMsg     = '';
   this.repositories = [];
 };
-
+//repository object
 var GitRepository = function(json){
+  this.repositoryName = json.name;
+  this.url = json..html_url;
+};
 
-}
+//json api call
+exports.githubApiData = function(userName){
+  var requestUri  = 'https://api.github.com/users/' + userName + '?access_token=' + apiKey;
+  var repositoryUri  = 'https://api.github.com/users/' + userName + '/repos?access_token=' + apiKey;
+  //user data
+  $.get(requestUri).then(function(jsonUser){
+    console.log(jsonUser);
+    newGithubUser = new GithubUser(jsonUser);
+    //user repositories
+    $.getJSON(repositoryUri, function(jsonRepos){
+      $.each(jsonRepos, function(i) {
+        var newRepo = GitRepository(jsonRepos[i]);
+        newGithubUser.repositories.push(newRepo);
+      });
+    });
+  }).fail(function(error){
+    console.log(error.responseJSON.message);
+    errorMsg = error.responseJSON.message;
+  });
+  return newGithubUser;
+};
